@@ -6,7 +6,17 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-		<ul><li><a href="/">Home</a></li><li><a href="/post">Post</a></li></ul>
+		<ul>
+			<li><a href="{{ path('home_page') }}">Home</a></li>
+			<li><a href="{{ path('post_page') }}">Post</a></li>
+			<li><a href="{{ path('login') }}">Login</a></li>
+			{% if is_granted('ROLE_USER') %}
+    		<li><a href="{{ path('logout') }}">Logout</a></li>
+			{% endif %}
+		</ul>
+		{% if is_granted('ROLE_USER') %}
+		<p>You are logged in as {{ app.user.username }}</p>
+		{% endif %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

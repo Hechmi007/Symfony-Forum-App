@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
-class Post
+class Comment
 {
     /**
      * @ORM\Id()
@@ -17,17 +17,17 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=35)
+     * @ORM\Column(type="integer")
      */
-    private $title;
+    private $postId;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=200)
      */
     private $text;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=255)
      */
     private $user;
 
@@ -36,14 +36,14 @@ class Post
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getPostId(): ?int
     {
-        return $this->title;
+        return $this->postId;
     }
 
-    public function setTitle(string $title): self
+    public function setPostId(int $postId): self
     {
-        $this->title = $title;
+        $this->postId = $postId;
 
         return $this;
     }
@@ -53,7 +53,7 @@ class Post
         return $this->text;
     }
 
-    public function setText(?string $text): self
+    public function setText(string $text): self
     {
         $this->text = $text;
 
