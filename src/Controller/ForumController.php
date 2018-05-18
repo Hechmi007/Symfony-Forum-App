@@ -76,6 +76,10 @@ class ForumController extends AbstractController
 	 */
 	public function showPost($id)
 	{
+		$usr = $this->getUser();
+		if ($usr != null)
+			$usr = $usr->getUsername();
+		
 		$post = $this->getDoctrine()
         	->getRepository(Post::class)
         	->find($id);
@@ -88,6 +92,32 @@ class ForumController extends AbstractController
             	'No post found, sorry'
         	);
    		}
-		return $this->render('show_post.html.twig', ["post"=>$post, "comments"=>$comments]);
+		return $this->render('show_post.html.twig', ["post"=>$post, "comments"=>$comments, "usr"=>$usr]);
+	}
+
+	/**
+	 * @Route("/remove/post/{id}", name="remove_post")
+	 */
+	public function removePost($id)
+	{
+		$usr = $this->getUser();
+
+		if($usr != null)
+		{
+			$usr = $usr->getUsername();
+		}
+
+		$post = $this->getDoctrine()
+			->getRepository(Post::class)
+			->find($id);
+
+		if ($post->getUser() == $usr)
+		{
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->remove($post);
+			$entityManager->flush();
+			return $this->redirectToRoute('home_page');
+		}
+		return $this->redirectToRoute('show_post', ["id"=> $id]);
 	}
 }

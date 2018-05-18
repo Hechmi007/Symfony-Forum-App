@@ -16,8 +16,12 @@
 		</ul>
 		{% if is_granted('ROLE_USER') %}
 		<p>You are logged in as {{ app.user.username }}</p>
-		{% endif %}
+		{% endif %}	
         {% block body %}{% endblock %}
+		
+		{% if is_granted('ROLE_USER') %}
+    	<footer><a href="{{ path('delete_user', {"username": app.user.username}) }}">Delete Account</a></footer>
+		{% endif %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

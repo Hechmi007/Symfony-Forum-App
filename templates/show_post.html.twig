@@ -5,10 +5,18 @@
 <h2>{{ post.title }}</h2>
 <p>{{ post.text }}</p>
 <a href="{{ path('comment_page', {"id": post.id}) }}">Comment</a>
+{% if usr == post.user %}
+<a href="{{ path('remove_post', {"id": post.id}) }}">Remove post</a>
+{% endif %}
 <h3>Comments</h3>
 <ul>
 {% for comment in comments %}
-<li>{{comment.user}} said {{ comment.text }}</li>
+	<li>
+		{{comment.user}} said {{ comment.text }}
+		{% if comment.user == usr %}
+			<a href="{{ path('remove_comment', {"postId": comment.postId, "id": comment.id}) }}">Remove</a>
+		{% endif %}
+	</li>
 {% endfor %}
 </ul>
 {% endblock %}

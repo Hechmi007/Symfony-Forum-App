@@ -37,4 +37,28 @@ class CommentController extends AbstractController
 		}
 		return $this->render('comment.html.twig', ["form"=>$form->createView(),]);
     }
+
+	/**
+	 * @Route("/remove/comment/{postId}/{id}", name="remove_comment")
+	 */
+	public function remove_comment($postId, $id)
+	{
+		$usr = $this->getUser();
+
+		if ($usr != null)
+			$usr = $usr->getUsername();
+
+		$comment = $this->getDoctrine()
+			->getRepository(Comment::class)
+			->findOneBy(['postId'=>$postId, 'id'=>$id]);
+
+		if ($comment->getUser() == $usr)
+		{
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->remove($comment);
+			$entityManager->flush();
+			return $this->redirectToRoute("show_post", ["id"=> $postId]);
+		}
+		return $this->redirectToRoute('show_post', ["id"=> $postId]);
+	}
 }
