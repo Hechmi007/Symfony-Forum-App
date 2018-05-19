@@ -25,11 +25,9 @@ class ForumController extends AbstractController
         	->getRepository(Post::class)
         	->findAll();
 
-    	if (!$posts) {
-        	throw $this->createNotFoundException(
-            	'No posts yet'
-        	);
-   		}
+    	if (!$posts){
+        	return $this->render('no-post.html.twig');
+   	}
         return $this->render('home_page.html.twig', ["posts"=>$posts]);
     }
 
