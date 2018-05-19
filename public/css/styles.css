@@ -1,0 +1,18 @@
+body {
+  background-color: #e8e8e8; }
+
+#list-post-title {
+  font-size: 115%; }
+
+#main-list {
+  list-style-type: none;
+  margin-top: 1.5%;
+  padding-left: 3%;
+  padding-right: 3%; }
+
+a:hover {
+  color: white;
+  text-decoration: none;
+  background-color: black; }
+
+/*# sourceMappingURL=styles.css.map */

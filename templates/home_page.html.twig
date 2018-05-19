@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<p>Home_Page</p>
-<ul>
+<div id="main-list" class="container-fluid">
 {% for post in posts %}
-<li><a href="{{ path('show_post', {'id': post.id}) }}">{{ post.title }}</a></li>
+<div id="list-post" class="row">
+<a href="{{ path('show_post', {'id': post.id}) }}">
+	<span id="list-post-title">{{ post.title }}</span>
+</a>
+</div>
+<div class="row">
+<p style="font-weight:light;">Posted by {{ post.user }}</p>
+</div>
 {% endfor %}
-</ul>
+</div>
 {% endblock %}

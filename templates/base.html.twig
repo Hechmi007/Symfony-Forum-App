@@ -2,21 +2,41 @@
 <html>
     <head>
         <meta charset="UTF-8">
+		<link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/css/styles.css"/>
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-		<ul>
-			<li><a href="{{ path('home_page') }}">Home</a></li>
-			<li><a href="{{ path('post_page') }}">Post</a></li>
-			<li><a href="{{ path('login') }}">Login</a></li>
-			{% if is_granted('ROLE_USER') %}
-    		<li><a href="{{ path('logout') }}">Logout</a></li>
-			{% endif %}
-		</ul>
-		{% if is_granted('ROLE_USER') %}
-		<p>You are logged in as {{ app.user.username }}</p>
-		{% endif %}	
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  			<a class="navbar-brand" href="{{ path('home_page') }}">
+					r/{% if is_granted('ROLE_USER') %}{{app.user.username }}{% else %}fake{% endif %}
+			</a>
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" style="">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+  			<div class="collapse navbar-collapse" id="navbarColor03">
+    			<ul class="navbar-nav mr-auto">
+      				<li class="nav-item active">
+        				<a class="nav-link" href="{{ path('home_page') }}">Home<span class="sr-only">(current)</span></a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="{{ path('login') }}">Login</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="{{ path('post_page') }}">Post</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="#">About</a>
+      				</li>
+					{% if is_granted('ROLE_USER') %}
+					<li class="nav-item">
+        				<a class="nav-link" href="{{ path('logout') }}">Logout</a>
+      				</li>
+					{% endif %}
+    			</ul>
+  			</div>
+		</nav>
         {% block body %}{% endblock %}
 		
 		{% if is_granted('ROLE_USER') %}
