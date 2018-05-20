@@ -1,18 +1,49 @@
 body {
-  background-color: #e8e8e8; }
+  background-color: #e8e8e8;
+}
+
+ul {
+  list-style-type: none;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  text-align: right;
+}
+
+.remove-post-button {
+  margin-top: 0.5vw;
+  margin-bottom: 1vw;
+}
+
+.post-title {
+  margin-top: 4vw;
+}
+
+.post-text {
+  border: 1px solid black;
+  padding: 1.5%;
+  background-color: white;
+  margin-bottom: 1vw;
+}
 
 #list-post-title {
-  font-size: 115%; }
+  font-size: 2vw;
+}
 
 #main-list {
   list-style-type: none;
   margin-top: 1.5%;
   padding-left: 3%;
-  padding-right: 3%; }
+  padding-right: 3%;
+}
 
 a:hover {
-  color: white;
   text-decoration: none;
-  background-color: black; }
+}
 
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=public/css/styles.css.map */

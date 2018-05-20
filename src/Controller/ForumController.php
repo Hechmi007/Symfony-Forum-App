@@ -15,21 +15,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ForumController extends AbstractController
 {
-    /**
-     * @Route("/", name="home_page")
-	 * @Method({"GET"});
-     */
-    public function index()
-    {
+	/**
+	* @Route("/", name="home_page")
+	* @Method({"GET"});
+	*/
+	public function index()
+    	{
 		 $posts = $this->getDoctrine()
         	->getRepository(Post::class)
         	->findAll();
 
     	if (!$posts){
         	return $this->render('no-post.html.twig');
-   	}
-        return $this->render('home_page.html.twig', ["posts"=>$posts]);
-    }
+	}
+	return $this->render('home_page.html.twig', ["posts"=>$posts]);
+    	}
 
 	/**
 	 * @Route("/admin", name="admin_page")

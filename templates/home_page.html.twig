@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div id="main-list" class="container-fluid">
+<div id="main-list" class="container">
 {% for post in posts %}
 <div id="list-post" class="row">
 <a href="{{ path('show_post', {'id': post.id}) }}">

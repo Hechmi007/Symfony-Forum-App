@@ -2,13 +2,37 @@ body{
 	background-color: #e8e8e8;
 }
 
-#list-post-title{
-	font-size: 115%;
+ul{
+	list-style-type: none;
 }
 
-#list-post{
-	//padding-top: .25%;
-	//padding-bottom: .25%;
+footer{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: black;
+	text-align: right;
+}
+
+.remove-post-button{
+	margin-top: .5vw;
+	margin-bottom: 1vw;
+}
+
+.post-title{
+	margin-top: 4vw;
+}
+
+.post-text{
+	border: 1px solid black;
+	padding: 1.5%;
+	background-color: white;
+	margin-bottom: 1vw;
+}
+
+#list-post-title{
+	font-size: 2vw;
 }
 
 #main-list{
@@ -19,7 +43,5 @@ body{
 }
 
 a:hover{
-	color: white;
 	text-decoration: none;
-	background-color: black;
 }
