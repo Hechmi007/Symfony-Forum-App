@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\PostType;
@@ -66,6 +67,24 @@ class ForumController extends AbstractController
 
 		
 		return $this->render('post_page.html.twig', ["form"=>$form->createView(),]);
+	}
+
+	/**
+	 * @Route("/profile/{username}", name="profile_page")
+	 */
+	public function profile($username)
+	{
+		$user = $this->getDoctrine()
+			->getRepository(User::class)
+			->findOneBy(['username'=>$username]);
+
+		if (!$user) {
+			throw $this->createNotFoundException(
+				'No user found with the username: '.$username
+			);
+		}
+
+		return $this->render('profile-page.html.twig', ["user"=>$user]);
 	}
 
 	/**
