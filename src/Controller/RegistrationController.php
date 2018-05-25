@@ -22,14 +22,14 @@ class RegistrationController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+        	$password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+        	$user->setPassword($password);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+        	$entityManager = $this->getDoctrine()->getManager();
+            	$entityManager->persist($user);
+            	$entityManager->flush();
 
-            return $this->redirectToRoute('home_page');
+		return $this->redirectToRoute('home_page');
         }
 
         return $this->render(

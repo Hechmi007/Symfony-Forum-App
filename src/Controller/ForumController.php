@@ -22,14 +22,15 @@ class ForumController extends AbstractController
 	*/
 	public function index()
     	{
-		 $posts = $this->getDoctrine()
-        	->getRepository(Post::class)
-        	->findAll();
+		$posts = $this->getDoctrine()
+        		->getRepository(Post::class)
+			->findAll();
 
-    	if (!$posts){
-        	return $this->render('no-post.html.twig');
-	}
-	return $this->render('home_page.html.twig', ["posts"=>$posts]);
+    		if (!$posts){
+        		return $this->render('no-post.html.twig');
+		}
+
+		return $this->render('home_page.html.twig', ["posts"=>$posts]);
     	}
 
 	/**
@@ -54,18 +55,16 @@ class ForumController extends AbstractController
 
 		$form->handleRequest($request);
 
-		if ($form->isSubmitted() && $form->isValid()) {
-        	
-			$post = $form->getData();
-	
+		if ($form->isSubmitted() && $form->isValid()){
+        		$post = $form->getData();
+
 			$entityManager = $this->getDoctrine()->getManager();
-        	$entityManager->persist($post);
-        	$entityManager->flush();
+        		$entityManager->persist($post);
+        		$entityManager->flush();
 
-        	return $this->redirectToRoute('home_page');
-    	}
+        		return $this->redirectToRoute('home_page');
+    		}
 
-		
 		return $this->render('post_page.html.twig', ["form"=>$form->createView(),]);
 	}
 
@@ -78,13 +77,21 @@ class ForumController extends AbstractController
 			->getRepository(User::class)
 			->findOneBy(['username'=>$username]);
 
+		$comments = $this->getDoctrine()
+			->getRepository(Comment::class)
+			->findBy(['user'=>$username]);
+		
+		$posts = $this->getDoctrine()
+			->getRepository(Post::class)
+			->findBy(['user'=>$username]);
+		
 		if (!$user) {
 			throw $this->createNotFoundException(
 				'No user found with the username: '.$username
 			);
 		}
 
-		return $this->render('profile-page.html.twig', ["user"=>$user]);
+		return $this->render('profile-page.html.twig', ["user"=>$user, "comments"=>$comments, "posts"=>$posts]);
 	}
 
 	/**

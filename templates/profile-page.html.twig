@@ -1,5 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>{{ user.username }}</h1>
+<div style="margin-top: 2vw;" class="container">
+<div class="row">
+<h3>{{ user.username }}</h3>
+</div>
+<div class="row">
+<h5>Posts</h5>
+</div>
+<div class="row">
+<ul class="list-group list-group-flush">
+{% for post in posts %}
+<li class="list-group-item"><a href="{{ path('show_post', {"id": post.id}) }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+</div>
+<div class="row">
+<h5>Comments</h5>
+</div>
+<div class="row">
+<ul class="list-group list-group-flush">
+{% for comment in comments %}
+<li class="list-group-item"><a href="{{ path('show_post', {"id": comment.postId}) }}">{{ comment.text }}</a></li>
+{% endfor %}
+</ul>
+</div>
+</div>
 {% endblock %}
