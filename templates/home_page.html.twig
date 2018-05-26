@@ -9,7 +9,7 @@
 <a href="{{ path('show_post', {'id': post.id}) }}">
 	<span id="list-post-title">{{ post.title }}</span>
 </a>
-<small>Posted by <a href="{{ path('profile_page', {"username": post.user}) }}">{{ post.user }}</a></small>
+<small><div style="text-align:right;">Posted by <a href="{{ path('profile_page', {"username": post.user}) }}">{{ post.user }}</a></div></small>
 </li>
 {% endfor %}
 </ul>

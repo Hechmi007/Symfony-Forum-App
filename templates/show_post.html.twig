@@ -1,45 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div style="margin-top: 2vw;" class="container">
-<div class="card">
-<div class="card-header">
-	posted by {{ post.user }}
-</div>
-<div class="card-body">
-	<h3 class="card-title">{{ post.title }}</h3>
-	<p class="card-text">{{ post.text }}</p>
-{% if usr == post.user %}
-<div class="remove-post-button row">
-	<a href="{{ path('remove_post', {"id": post.id}) }}"><button type="button" class="btn btn-danger btn-sm">Remove Post</button></a>
-</div>
-{% endif %}
-</div>
-</div>
-</div>
-<div class="container">
-	<div style="margin-top: 10vw;" class="row">
+<div style="margin-top:2vw;" class="container">
+	<div class="row align-items-center">
 		<div class="col">
-			<h5>Comments</h5>
+			<div class="card">
+				<div class="card-header">posted by <a href="{{ path('profile_page', {"username": post.user}) }}">{{ post.user }}</a></div>
+				<div class="card-body">
+					<h3 class="card-title">{{ post.title }}</h3>
+					<p class="card-text">{{ post.text }}</p>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="row">
+</div>
+<div style="margin-top:1vw;" class="container">
+	<div class="row align-items-center">
 		<div class="col">
-			<ul class="list-group list-group-flush">
-			{% for comment in comments %}
-			<li class="list-group-item">
-				<p>{{comment.user}}: {{ comment.text }}
-				{% if comment.user == usr %}
-				<small><a href="{{ path('remove_comment', {"postId": comment.postId, "id": comment.id}) }}">Remove</a></small>
-				{% endif %}</p>
-			</li>
-			{% endfor %}
-			</ul>
+			{% if usr == post.user %}
+				<a href="{{ path('remove_post', {"id": post.id}) }}"><button type="button" class="btn btn-danger btn-sm">Remove Post</button></a>
+			{% endif %}
 		</div>
 	</div>
-	<div class="row">
+</div>
+<div style="margin-top:4vw;" class="container">
+	<div class="row align-items-center">
 		<div class="col">
-			<a href="{{ path('comment_page', {"id": post.id}) }}"><button type="button" class="btn btn-success btn-sm">Comment</button></a>
+			<div class="card">
+				<div class="card-header">comments</div>
+				<div class="card-body">
+					<ul class="list-group list-group-flush">
+						{% for comment in comments %}
+							<li class="list-group-item">
+								<p>{{comment.user}}: {{ comment.text }}
+									{% if comment.user == usr %}
+										<small><a href="{{ path('remove_comment', {"postId": comment.postId, "id": comment.id}) }}">Remove</a></small>
+									{% endif %}
+								</p>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="margin-top:1vw;" class="container">
+	<div class="row align-items-center">
+		<div class="col">
+			<a href="{{ path('comment_page', {"id": post.id}) }}">
+				<button type="button" class="btn btn-success btn-sm">Comment</button>
+			</a>
 		</div>
 	</div>
 </div>
