@@ -135,10 +135,18 @@ class ForumController extends AbstractController
 			->getRepository(Post::class)
 			->find($id);
 
+		$comments = $this->getDoctrine()
+			->getRepository(Comment::class)
+			->findByPost_id($id);
+
 		if ($post->getUser() == $usr)
 		{
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->remove($post);
+			foreach ($comments as $comment)
+			{
+				$entityManager->remove($comment);
+			}
 			$entityManager->flush();
 			return $this->redirectToRoute('home_page');
 		}
