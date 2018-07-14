@@ -1,5 +1,17 @@
+body {
+  background-color: #e8e8e8;
+}
+
 ul {
   list-style-type: none;
+}
+
+ul li a {
+  color: #145d77;
+}
+
+ul li a:hover {
+  color: #44afd6;
 }
 
 footer {
@@ -33,4 +45,4 @@ a:hover {
   text-decoration: none;
 }
 
-/*# sourceMappingURL=public/css/styles.css.map */
+/*# sourceMappingURL=../css/styles.css.map */
